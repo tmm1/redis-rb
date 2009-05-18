@@ -83,7 +83,7 @@ class Server
   # Returns the connected socket object on success or nil on failure.
 
   def socket
-    return @sock if @sock and not @sock.closed?
+    return @sock if @sock and not @sock.closed? and @sock.stat.readable?
 
     @sock = nil
 
