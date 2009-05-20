@@ -156,7 +156,7 @@ class Redis
   def read(length = read_proto)
     with_socket_management(@server) do |socket|
       res = socket.read(length)
-      puts "read is #{res.inspect}" if $debug
+      puts "read(#{length}) is #{res.inspect}" if $debug
       res
     end
   end
@@ -405,7 +405,7 @@ class Redis
     list = []
     Integer(res).times do
       vf = get_response
-      puts "curren vf is #{vf.inspect}" if $debug
+      puts "current vf is #{vf.inspect}" if $debug
       list << vf
       puts "current list is #{list.inspect}" if $debug
     end
@@ -481,7 +481,7 @@ class Redis
     when ERR
       raise RedisError, single_line
     else
-      raise RedisError, "Unknown response.."
+      raise RedisError, "Unknown response.. (reply_type: #{rtype.inspect})"
     end
   end
   
